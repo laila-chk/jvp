@@ -47,11 +47,41 @@ public class Transaction {
     this.recipient.getName() + "\namount: " + this.amount + "\ncategory: " + this.category);
   }
 
+  //credit = money out; debit = money in
   public void setTransactionDetails(User sender, User recipient, Integer amount) {
     this.sender = sender;
     this.recipient = recipient;
-    this.amount = amount;
-    this.category = categ.debit;
+    if(amount > 0){
+      this.amount = amount;
+        this.category = categ.debit;
+    } else {
+      this.amount = -1 * amount;
+      this.category = categ.credit;
+    }
+  }
+
+  public Transaction send(User sender, User recipient, Integer amount){
+    Transaction trs = new Transaction();
+
+    if(amount <= 0){
+      System.err.println("Transaction Failed ! \nplease try a valid amount.");
+      return null;
+    }
+
+    else if (sender.getBalance() < amount){
+      System.err.println("Transaction Failed! \nNot enough Balance for this action.");
+      return null;
+    }
+
+    else {
+      sender.setBalance(sender.getBalance() - amount);
+      recipient.setBalance(recipient.getBalance() + amount);
+      this.setTransactionDetails(sender, recipient, amount);
+      trs.setTransactionDetails(sender, recipient, amount * -1);
+      System.out.println("Transaction [" + this.getId() + "] successful!");
+    }
+
+    return trs;
   }
 
 }
