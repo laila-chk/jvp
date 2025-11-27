@@ -29,4 +29,8 @@ public class UsersArrayList implements UsersList {
     return users;
   }
 
+  public UsersArrayList(){
+
+  }
+
 }
