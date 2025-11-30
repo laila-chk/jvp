@@ -1,32 +1,41 @@
-import java.util.ArrayList;
-//mentioned: Nested ArrayList<T>, does that mean we should stupidely
-//store the users in an array and the users data in an array inside it?
 
 public class UsersArrayList implements UsersList {
-  private ArrayList<User> users = new ArrayList<>(10);
+  private User[] users = new User[10];
+  private int size = 0;
+  private int capacity = 10;
 
   public void addUser(User newUser){
-    users.add(newUser);
+    if(size == capacity){
+      User[] tmp = new User[size + size/2];
+      for (int i = 0; i < size; i++)
+        tmp[i] = users[i];
+      users = tmp;
+      capacity = size + size/2;
+    }
+    users[size++] = newUser;
   }
 
   public User getUserById(Integer id){
-    for (User u : users){
-      if (u.getId().equals(id))
-        return u;
+    for (int i = 0; i < size; i++){
+      if (users[i].getId().equals(id))
+        return users[i];
     }
     throw new UserNotFoundException("User ain't here ha!");
   }
   
   public User getUserByIndex(Integer index){
-    return users.get(index);
+    return users[index];
   }
 
-  public Integer getTotalUsers(){
-    return users.size();
+  public int getTotalUsers(){
+    return size;
   }
 
-  public ArrayList<User> getUsers(){
-    return users;
+  public User[] getUsers(){
+    User[] tmp = new User[size];
+    for (int i = 0; i < size; i++)
+      tmp[i] = users[i];
+    return tmp;
   }
 
   public UsersArrayList(){
