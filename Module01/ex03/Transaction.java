@@ -11,9 +11,12 @@ public class Transaction {
   private User sender;
   private categ category;
   private Integer amount;
+  // private UUID next;
+  private Transaction next;
 
   public Transaction(){
     id = UUID.randomUUID();
+    next = null;
   }
 
   public UUID getId(){
@@ -77,5 +80,21 @@ public class Transaction {
 
     return trs;
   }
+
+  public Transaction getNext() {
+    return this.next;
+  }  
+
+  public void setNext(Transaction tr){
+    this.next = tr;
+  }
+
+  // public UUID getNext() {
+  //   return this.next;
+  // }  
+
+  // public void setNext(UUID id){
+  //   this.next = id;
+  // }
 
 }

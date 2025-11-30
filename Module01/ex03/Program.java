@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.UUID;
 
 public class Program {
   public static void main(String[] args) {
@@ -17,6 +17,7 @@ public class Program {
     Transaction trs = new Transaction();
 
     trs.send(jake, fen, 7);
+    UUID toRemove = trs.getId();
     System.out.println(">Jake gifted fen 7 coins");
     trsList.addTransaction(trs);
     trs = new Transaction();
@@ -34,10 +35,20 @@ public class Program {
     trs.send(jake, lemongrab, 1);
     trsList.addTransaction(trs);
     
-    LinkedList<Transaction> transactionsLinkedList = jake.getTransactions().getTransactionsLinkedList();
+    TransactionsLinkedList list = jake.getTransactions().getTransactionsLinkedList();
 
-    for (Transaction tr : transactionsLinkedList ){
+    Transaction savedHead = list.getHead();
+    while(list.getHead() != null){
       System.out.println("----------------------------------------");
+      list.getHead().printTransactionDetails();
+      list.setHead(list.getHead().getNext());
+    }
+    //let's remove a transaction using uuid:
+    list.setHead(savedHead);
+    list.removeTrnsById(toRemove);
+    Transaction[] arr = list.toArray();
+    for(Transaction tr : arr){
+      System.out.println("****************************************");
       tr.printTransactionDetails();
     }
   }

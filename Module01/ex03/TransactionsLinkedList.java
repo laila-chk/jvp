@@ -1,33 +1,68 @@
 import java.util.UUID;
-import java.util.LinkedList;
 
 public class TransactionsLinkedList implements TransactionsList {
-  public LinkedList<Transaction> transactions = new LinkedList<>();
+  public Transaction head;
+  private int size;
 
-  public TransactionsLinkedList(){
-
-  }
+  public TransactionsLinkedList(){}
 
   public void addTransaction(Transaction trs){
-    transactions.add(trs);
+    if (head == null){
+      head = trs;
+      size = 1;
+      return;
+    }
+    Transaction tr = head;
+    while(tr.getNext() != null)
+      tr = tr.getNext();
+    tr.setNext(trs);
+    size++;
   }
 
   public void removeTrnsById(UUID id){
-    for (Transaction trs : transactions){
-      if (trs.getId().equals(id)){
-        transactions.remove(trs);
+    if(this.head.getId().equals(id)){
+      head = head.getNext();
+      size--;
+      return;
+    } 
+    Transaction prev = this.head;
+    Transaction tr = this.head.getNext();
+    while (tr != null){
+      if (tr.getId().equals(id)){
+        prev.setNext(tr.getNext());
+        size--;
         return;
       }
+      prev = prev.getNext();
+      tr = tr.getNext();
     }
     throw new TransactionNotFoundException("Invalid ID");
   }
   
-  public Object[] toArray() {
-    return transactions.toArray();
+  public Transaction[] toArray() {
+    Transaction[] ret = new Transaction[size];
+    Transaction tr = head;
+    int i = 0;
+    while(tr != null){
+      ret[i++] = tr;
+      tr = tr.getNext();
+    }
+    return ret;
   }
 
-  public LinkedList<Transaction> getTransactionsLinkedList(){
-    return transactions;
+  public TransactionsLinkedList getTransactionsLinkedList(){
+    return this;
   }
   
+  public Transaction getHead() {
+    return head;
+  }
+
+  public void setHead(Transaction head) {
+    this.head = head;
+  }
+
+  public int getSize() {
+    return size;
+  }
 }
