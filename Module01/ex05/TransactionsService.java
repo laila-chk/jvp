@@ -68,6 +68,10 @@ public class TransactionsService {
   public Transaction[] checkValidity() {
     TransactionsLinkedList trs = new TransactionsLinkedList();
     Transaction tr = allTrns.getHead();
+    if(tr != null && tr.getNext() == null){
+      trs.addTransaction(new Transaction(tr));
+      return trs.toArray();
+    }
     while(tr != null){
       System.out.println("ig hna");
       if(!tr.getId().equals(tr.getNext().getId())){
