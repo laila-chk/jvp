@@ -22,10 +22,10 @@ public class Program {
       "Finish execution"
     };
 
-    Scanner sc = new Scanner(System.in);
+    // Scanner sc = new Scanner(System.in);
     Menu myMenu = new Menu();
 
-    try {
+    try (Scanner sc = new Scanner(System.in)){
       while (true){
         for (int i = 0; i < menu.length; i++) {
           if (i == 4 && mode.equals("prod")){
@@ -34,8 +34,18 @@ public class Program {
           }
           System.out.println((i + 1) + ". " + menu[i]);
         }
+
+        if (!sc.hasNext()) {
+          System.out.println("EOF detected. Exiting...");
+          break;
+        }
+
         try {
           int option = sc.nextInt();
+          if(mode.equals("prod") && option > 5){
+            throw new RuntimeException();
+          }
+
           if (option == 7 || (option == 5 && mode.equals("prod")))
             break;
           myMenu.menuOption(option);

@@ -87,7 +87,6 @@ public class Menu {
       try {
         System.out.println("Enter a user ID and a transfer ID");
         String line = sc.nextLine();
-        System.out.println("--> " + line);
         String[] ids = line.split(" ");
         Integer uid = Integer.parseInt(ids[0]);
         UUID tid = UUID.fromString(ids[1]);
@@ -122,6 +121,10 @@ public class Menu {
       } catch (Exception e) {
         System.err.println("error in case 6: " + e.getMessage());
       } 
+      break;
+
+      default:
+      System.err.println("Invalide option!");
     }
   }
 
