@@ -2,8 +2,9 @@
     this README file, along the all the code in my repo, was written the traditional way (no AI prompting..)
     so remarques, notes, critisism are welcomed, even though I kinda did the minimum.. :D
 </sub>
+
 # Module 00
-        This day will help us pick up the syntax of java, and buiding some programs using the bare minimum.
+    This day will help us pick up the syntax of java, and buiding some programs using the bare minimum.
 
 # Module 01
     This Module introduced a handful of interesting and useful concepts (unlike M00)
@@ -53,10 +54,11 @@
     We worked here with RuntimeException, which is an Unchecked exception, we implemented it to create our own custom exception for
     when a user or a transaction aren't found.
     there are mainly two types of exceptions: checked and Unchecked ones, RuntimeException and all the classes inheriting from it
-    are **Unchecked**, and that means we don't necessarily have to handle the exception in case it occured, by wrapping it in a try_catch
-    or by adding the throws keyword to the methods that throws. as if we're considering it as something that could generally prevented
-    programatically (by checking for a certain condition, ex: ArrayIndexOutOfBoundException can be avoided by checking if the index < size)
-    with Unchecked exception, the program will be executed and until the exception happens and thrown, we'll know about it, unlike the
-    **checked exception** if not inside a try_catch, and not marked with throws, the program will not compile, it forces us to handle it
-    Unchecked exceptions are more tidy and result in a cleaner code and classes, which makes them prefered.
+    are **Unchecked**, and that means we don't necessarily have to handle the exception in case it occured, by wrapping it in a 
+    try_catch or by adding the throws keyword to the methods that throws. as if we're considering it as something that could
+    generally prevented programatically (by checking for a certain condition, ex: ArrayIndexOutOfBoundException can be avoided
+    by checking if the index < size) with Unchecked exception, the program will be executed and until the exception happens and
+    thrown, we'll know about it, unlike the **checked exception** if not inside a try_catch, and not marked with throws, the program
+    will not compile, it forces us to handle it Unchecked exceptions are more tidy and result in a cleaner code and classes,
+    which makes them more prefered.
        
