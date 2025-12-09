@@ -1,10 +1,8 @@
 import java.util.UUID;
 import java.util.Random;
 
-//Integer, String, UUID, enumerations
 
 public class User {
-  // private UUID id;
   private Integer id;
   private String name;
   private Integer balance;

@@ -28,19 +28,16 @@ public class Menu {
       break;
 
       case 2:
-      while(true){
         try {
           System.out.println("Enter a user ID");
           Integer userId = sc.nextInt();
           Integer balance = trService.getUserBalanceById(userId);
           String username = trService.getTrnsServUsers().getUserById(userId).getName();
           System.out.println(username + " - " + balance );
-          break;
         } catch (Exception e) {
           System.err.println("Invalid input!");
           sc.nextLine();
         }
-      }
       break;
 
       case 3:
@@ -60,7 +57,6 @@ public class Menu {
 
 
       case 4:
-      while(true){
         try {
           System.out.println("Enter a user ID");
           Integer userId = sc.nextInt();
@@ -75,12 +71,10 @@ public class Menu {
                 + tr.getSender().getId() + ") " + tr.getAmount() +" with id = " + tr.getId());
           }
           sc.nextLine();
-          break;
         } catch (Exception e) {
           System.err.println("Invalid ID!");
           sc.nextLine();
         }
-      }
       break;
 
       case 5:

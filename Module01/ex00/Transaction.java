@@ -1,11 +1,6 @@
 import java.util.UUID;
 
 public class Transaction {
-//  • Identifier
-//  • Recipient (User type)
-//  • Sender (User type)
-//  • Transfer category (debits, credits)
-//  • Transfer amount
 
   enum categ{
     debit,
