@@ -19,7 +19,7 @@ public class Program {
         sb.append(String.format("%02X ", ch & 0xFF));
       if(i == 0){
         System.err.println("Error! file doens't have a signature!");
-        System.exit(1);
+        return "";
       }
       return sb.toString();
     } catch (FileNotFoundException e) {
@@ -48,7 +48,7 @@ public class Program {
       }
       return sigMap;
     } catch (IOException e){
-      System.err.println("Error! signatures,txt Not found.");
+      System.err.println("Error! signatures.txt Not found.");
       System.exit(1);
     }
     return null;
@@ -74,7 +74,6 @@ public class Program {
       }
     }
     System.err.println("Error! No matching signature in signatures.txt ¯\\_(ツ)_/¯." );
-    System.exit(1);
   }
 
   public static void main(String[] args) {
@@ -82,18 +81,15 @@ public class Program {
     String signature = "", path;
     Scanner sc = new Scanner(System.in);
     while (true){
-      // System.out.println("Insert file path");
+      if (!sc.hasNextLine())
+        break;
       path = sc.nextLine();
       if(path.equals("42"))
         break;
       signature = processFile(path);
       if(!signature.equals("")) {
         getType(signature, sigMap);
-        // System.err.println("Error! couldn't get signature from file, maybe it's empty.");
-        // continue;
       } 
-      // else
-        // getType(signature, sigMap);
     }
     sc.close();
   }
