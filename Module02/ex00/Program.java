@@ -62,7 +62,7 @@ public class Program {
           break;
         if(i == sig.length() - 1) {
           System.out.println("PROCESSED");
-          String wd = System.getProperty("user.dir");
+          // String wd = System.getProperty("user.dir");
           try (FileOutputStream fout = new FileOutputStream("result.txt", true)) { 
             val += "\n";
             fout.write(val.getBytes());
