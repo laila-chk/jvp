@@ -19,13 +19,13 @@ public class Program {
       System.err.println("Error! please provide absolute path\nUsage: java Program --current-folder=/current/folder/path");
       System.exit(1);
     }
-    String wd = System.getProperty("user.dir");
-    if(!wd.equals(splitedArg[1])){
-      System.err.println("Error! Wrong path idiot.");
+    Path path = Paths.get(splitedArg[1].trim());
+    if(!Files.exists(path) || !Files.isDirectory(path)){
+      System.err.println("Invalide directory!");
       System.exit(1);
     }
-    System.out.println(wd);
-    return wd;
+    System.out.println(splitedArg[1].trim());
+    return splitedArg[1].trim();
   }
   public static void main(String[] args) {
     String path = argsValidator(args);
@@ -41,8 +41,7 @@ public class Program {
         for (String s : files)
           System.out.println(s + " " + Math.floor((float)(new File(path+"/"+s).length()) / 100) /10 + " KB");
       }
-      // cd ../folder2
-      else if(line.trim().startsWith("cd")){
+      else if(line.trim().startsWith("cd ")){
         String[] splitedCd = line.split(" ");
         if(splitedCd.length != 2){
           System.err.println("Invalide command!");
@@ -50,13 +49,31 @@ public class Program {
           if(!Files.exists(Paths.get(path, splitedCd[1].trim()))){
             System.err.println("Bad path! please enter a correct relative path.");
           }else{
-            System.err.println("path was : " + path);
             file = Paths.get(path, splitedCd[1].trim()).normalize().toFile();
             path = file.getAbsolutePath();
-            System.err.println("hurraaay new path: " + path);
+            System.err.println(path);
           }
         }
         
+      }else if(line.trim().startsWith("mv ")){
+        String[] splitedMv = line.split(" ");
+        if (splitedMv.length != 3){
+          System.err.println("mv: missing parameter\nUsage: mv WHAT WHERE");
+        }else{
+          Path path1 = Paths.get(path, splitedMv[1].trim());
+          Path path2 = Paths.get(path, splitedMv[2].trim());
+          if(!Files.exists(path1))
+            System.err.println("Error! invalide file: " + splitedMv[1].trim());
+          else{
+            try {
+              if(Files.isDirectory(path2))
+                path2 = Paths.get(path, splitedMv[2].trim(), splitedMv[1].trim());
+              Files.move(path1, path2);
+            } catch (Exception e) {
+              System.err.println("Error while using mv command.");
+            }
+          }
+        }
       }
     }
   }
