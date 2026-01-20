@@ -36,7 +36,7 @@ for writing into the the files. for example:
 
 **BufferedReader** allows reading line by line, as well as reading a single character,
 meanwhile **FileInputStream** have mainly the **`read`** method, that allows either 
-reading a single byte each time, or `b.length` bytes of data in case of using **`read**(byte[] b)`.
+reading a single byte each time, or `b.length` bytes of data in case of using `read(byte[] b)`.
 
 ### Files creation, moving and more
 
