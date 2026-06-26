@@ -2,17 +2,20 @@
 ### introduction:
 back in the days, when computers weren't taken for granted, and their abilities were very limited, it wasn't possible to use more than a single program (or application if you'd like) at once, for example if you're working on an excel sheet, you can't open anything else unless you closed excel (yeah, not even a music player), thankfully that was frustrating enough that they had to come up with a solution, like for example make the operating system manage and help the CPU handle more than a single program by passing the processes of those apps one after another for a very short time in a seamless way, thus the concept of **Multitasking** was born
 
-┌──────────┐ ── (Excel) ─────────► [ Process 1 ] ──────────────────► [ Process 1  ] ───...
-│  OS /         │
-│  CPU         │ ── (Music Player) ────────────────► [  Process 2 ] ──────────────────► [Process 2 ] ───...
-└──────────┘ 
+```text
+┌──────────┐ ── (Excel) ─────────► [ Process 1 ] ──────────────────► [ Process 1  ] ───...  
+│  OS /    │  
+│  CPU     │ ── (Music Player) ────────────────► [  Process 2 ] ──────────────────► [Process 2 ] ───...  
+└──────────┘
+```
 
 But we would ask for more wouldn't we?like my computer I want to multitask, want my music from Youtube, check my emails, brows the internet more.. all meanwhile excel is open and waiting on the side while i'm pretending to be productive hehe, and this was solved by **Multithreading**, so meanwhile the computer is jumping between processes of different programs, it's also jumping between the threads of a single app too, in this example, we're talking about the threads of your beloved browser (Internet Explorer)
-
-┌──────────┐ ── (Excel) ───────────► [ Process 1 ] ──────────────────────► [ Process 1  ] ───...
-│  OS /         │
-│  CPU         │ ── (Internet Explorer) ──────────────► [Process 2 (Th1 -- Th2)] ──────────────────► [Process 2  (Th1-- Th2) ] ───...
-└──────────┘ 
+```text
+┌──────────┐ ── (Excel) ───────────► [ Process 1 ] ──────────────────────► [ Process 1  ] ───...  
+│  OS /    │
+│  CPU     │ ── (Internet Explorer) ──────────────► [Process 2 (Th1 -- Th2)] ───────────────► [Process 2  (Th1-- Th2) ] ───
+└──────────┘
+```
 but what if the computer had more than one CPU? or cores, which is the case nowadays, well two different programs can actually run at the exact same time each on a CPU (or a core), as well as two threads, can run at the same time, and they could be of the same program or not.
 ### Creating, starting and stopping threads
 Theory aside, it's time to code a bit,
@@ -127,4 +130,3 @@ the JVM will keep running if the main thread exited and another thread is still 
 thread.setDaemon(true);
 thread.start();
 ```
-
