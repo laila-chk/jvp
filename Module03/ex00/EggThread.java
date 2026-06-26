@@ -8,10 +8,8 @@ public class EggThread extends Thread {
   }
   @Override 
   public void run(){
-    int val; 
-    while ((val = count.getAndDecrement()) > 0) {
+    while (count.getAndDecrement() > 0) {
       System.out.println("Egg");
-      val--;
     }
   }
 }

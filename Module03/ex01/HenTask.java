@@ -9,10 +9,8 @@ public class HenTask implements Runnable {
   }
   @Override
   public void run() {
-    int val; 
-    while ((val = count.getAndDecrement()) > 0){
+    while (count.getAndDecrement() > 0){
       System.out.println("Hen");
-      val--;
     }
   }
 }

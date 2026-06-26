@@ -1,5 +1,3 @@
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Program {
@@ -36,21 +34,24 @@ public class Program {
 
   public static void main(String[] args) {
     int reps = inptValidator(args);
-    BlockingQueue<Integer> ticket = new ArrayBlockingQueue<>(1); 
-      
-    AtomicInteger count = new AtomicInteger(reps);
 
-    HenTask henTask = new HenTask(count);
-    Thread hen = new Thread(henTask);
-    Thread egg = new EggThread(count, ticket);
-    hen.start();
-    egg.start();
-    try {
-      hen.join();
-      egg.join();
-    } catch (InterruptedException e) {
-      System.err.println("Error! Thread was interrupted");
-      Thread.currentThread().interrupt();
-    }
+    // AtomicInteger count = new AtomicInteger(reps);
+
+    // HenTask henTask = new HenTask(count);
+    // Thread hen = new Thread(henTask);
+    // Thread egg = new EggThread(count);
+    // hen.start();
+    // egg.start();
+    // try {
+    //   hen.join();
+    //   egg.join();
+    // } catch (InterruptedException e) {
+    //   System.err.println("Error! Thread was interrupted");
+    //   Thread.currentThread().interrupt();
+    // }
+    // while (reps > 0) {
+    //   System.out.println("Human");
+    //   reps--;
+    // }
   }
 }
