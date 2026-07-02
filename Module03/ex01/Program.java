@@ -1,4 +1,3 @@
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Program {
   public static int inptValidator(String[] args) {
@@ -33,25 +32,19 @@ public class Program {
   }
 
   public static void main(String[] args) {
-    int reps = inptValidator(args);
+    Integer reps = inptValidator(args);
 
-    // AtomicInteger count = new AtomicInteger(reps);
+    MyRunnable runn = new MyRunnable(reps);
+    Thread egg = new Thread(runn, "Egg");
+    Thread hen = new Thread(runn, "Hen");
 
-    // HenTask henTask = new HenTask(count);
-    // Thread hen = new Thread(henTask);
-    // Thread egg = new EggThread(count);
-    // hen.start();
-    // egg.start();
-    // try {
-    //   hen.join();
-    //   egg.join();
-    // } catch (InterruptedException e) {
-    //   System.err.println("Error! Thread was interrupted");
-    //   Thread.currentThread().interrupt();
-    // }
-    // while (reps > 0) {
-    //   System.out.println("Human");
-    //   reps--;
-    // }
+    egg.start();
+    try {
+      Thread.sleep(100); 
+    } catch (InterruptedException e) {
+      System.err.println("The sleep was interrupted.");
+    }
+    hen.start();
+
   }
 }
