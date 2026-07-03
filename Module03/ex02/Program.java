@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Program {
 
@@ -20,9 +21,9 @@ public class Program {
         }
         try {
           if (i == 1)
-            arrSize = Integer.parseInt(splitedArg[1]);
+          arrSize = Integer.parseInt(splitedArg[1]);
           else
-           threadsCount = Integer.parseInt(splitedArg[1]);
+          threadsCount = Integer.parseInt(splitedArg[1]);
         } catch (Exception e){
           System.err.println("Error! arraySize and threadsCount should be a number.");
           System.exit(1);
@@ -34,15 +35,23 @@ public class Program {
     }
   }
 
+  public static int[] generateArray(){
+    int i = 0;
+    int[] arr = new int[arrSize];
+    Random rand = new Random();
+    while (i < arrSize){
+      arr[i++] = rand.nextInt(1000);
+    }
+    return arr;
+  }
 
   public static void main(String[] args) {
     getParams(args);
     Total total = new Total();
     int start = 0, i = 1, sum = 0;
-    //arr needs to be randomly generated.
-    int[] arr = {1,1,1,1,1,1,1,1,1,1,1,1,1};
+    int[] arr = generateArray();
     for (int n : arr)
-      sum += n;
+    sum += n;
     System.out.println("Sum: " + sum);
     int chunckSize = arrSize / threadsCount;
     boolean lastThread = false;
