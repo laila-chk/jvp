@@ -2,13 +2,15 @@ public class MyRunnable implements Runnable {
 
   private int start, end;
   private int[] arr;
-  private int totalSum;
+  // private int totalSum;
+  private final Total total;
 
-  MyRunnable(int start, int end, int[] arr, int totalSum) {
+  MyRunnable(int start, int end, int[] arr, Total total) {
     this.start = start;
     this.end = end;
     this.arr = arr;
-    this.totalSum = totalSum;
+    // this.totalSum = totalSum;
+    this.total = total;
   }
 
   @Override
@@ -21,9 +23,8 @@ public class MyRunnable implements Runnable {
     }
     System.out.println(Thread.currentThread().getName() +": from " + start +" to "+ end +" sum is " + sum);
 
-    synchronized(this){
-      totalSum += sum;
-      System.out.println(totalSum + "**");
+    synchronized(total){
+      total.totalSum += sum;
     }
   }
   

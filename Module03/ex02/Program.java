@@ -34,28 +34,33 @@ public class Program {
     }
   }
 
-  static int totalSum = 0;
 
   public static void main(String[] args) {
     getParams(args);
+    Total total = new Total();
+    int start = 0, i = 1, sum = 0;
+    //arr needs to be randomly generated.
     int[] arr = {1,1,1,1,1,1,1,1,1,1,1,1,1};
+    for (int n : arr)
+      sum += n;
+    System.out.println("Sum: " + sum);
     int chunckSize = arrSize / threadsCount;
-    int start = 0, i = 1;
     boolean lastThread = false;
     while (start + chunckSize <=  arrSize) {
-      Thread thread1 = new Thread(new MyRunnable(start, start + chunckSize, arr, totalSum), "Thread " + i++);
-      thread1.start();
+      Thread thread = new Thread(new MyRunnable(start, start + chunckSize, arr, total), "Thread " + i++);
+      thread.start();
+      //looks kinda ugly.. might change it 
+      try {
+        thread.join();
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
       start += chunckSize + 1;
       if(start + chunckSize > arrSize && !lastThread){
         lastThread = true;
         chunckSize = arrSize - start - 1;
       }
     }
-    try {
-      Thread.sleep(1000); 
-    } catch (InterruptedException e) {
-      System.err.println("The sleep was interrupted.");
-    }
-    System.out.println("--" + totalSum);
+    System.out.println("Sum by threads: " + total.totalSum);
   }
 }
