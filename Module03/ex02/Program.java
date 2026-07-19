@@ -1,5 +1,6 @@
 import java.util.Random;
 
+import java.util.ArrayList;
 public class Program {
 
   static int arrSize = 0;
@@ -50,24 +51,27 @@ public class Program {
     Total total = new Total();
     int start = 0, i = 1, sum = 0;
     int[] arr = generateArray();
+    ArrayList<Thread> threads = new ArrayList<>();
     for (int n : arr)
-    sum += n;
+      sum += n;
     System.out.println("Sum: " + sum);
     int chunckSize = arrSize / threadsCount;
     boolean lastThread = false;
     while (start + chunckSize <=  arrSize) {
       Thread thread = new Thread(new MyRunnable(start, start + chunckSize, arr, total), "Thread " + i++);
       thread.start();
-      //looks kinda ugly.. might change it 
-      try {
-        thread.join();
-      } catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+      threads.add(thread);
       start += chunckSize + 1;
       if(start + chunckSize > arrSize && !lastThread){
         lastThread = true;
         chunckSize = arrSize - start - 1;
+      }
+    }
+    for(Thread th : threads){
+      try {
+        th.join();
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
       }
     }
     System.out.println("Sum by threads: " + total.totalSum);
