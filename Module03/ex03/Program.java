@@ -1,6 +1,11 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 public class Program {
   public static int getThreadsCount(String[] args){
@@ -11,10 +16,12 @@ public class Program {
     }
     try {
       if(!args[0].startsWith("--threadsCount=")) 
-        throw new Exception("bad arg");
+      throw new Exception();
       count = Integer.parseInt(args[0].split("=")[1]);
+      if (count <= 0)
+      throw new Exception();
     } catch (Exception e) {
-      System.err.println("Error!\nUsage: 'java Program.java --threadsCount=3'");
+      System.err.println("Error!\nUsage: 'java Program.java --threadsCount=3'\nwith Threads count > 0.");
       System.exit(1);
     }
     return count;
@@ -26,7 +33,7 @@ public class Program {
     try (BufferedReader buff = new BufferedReader(new FileReader("files_urls.txt"))) {
       String line;
       while((line = buff.readLine()) != null) 
-        links.add(line);
+      links.add(line);
     } catch (Exception e) {
       System.err.println("Error! couldn't read 'files_urls.txt'");
       System.exit(1);
@@ -41,6 +48,20 @@ public class Program {
   public static void main(String[] args) {
     int threadsCount = getThreadsCount(args);
     ArrayList <String> links = getLinks();
+    ArrayList <MyCallable> tasks = new ArrayList<>();
+
+    ExecutorService executor = Executors.newFixedThreadPool(threadsCount);
+    for (String s : links)
+    tasks.add(new MyCallable(s));
+    for (MyCallable c : tasks)
+    System.out.println("->" + c.src);
+    try {
+      List <Future<String>> future = executor.invokeAll(tasks);
+    } catch (InterruptedException e) {
+      System.err.println("An error occured while download..\n" + e.getMessage());
+    } finally {
+      executor.shutdown();
+    }
 
   }
 }
