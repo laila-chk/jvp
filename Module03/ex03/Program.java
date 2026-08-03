@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
@@ -49,12 +50,12 @@ public class Program {
     int threadsCount = getThreadsCount(args);
     ArrayList <String> links = getLinks();
     ArrayList <MyCallable> tasks = new ArrayList<>();
+    new File("Downloads").mkdir();
 
     ExecutorService executor = Executors.newFixedThreadPool(threadsCount);
+    int i = 1;
     for (String s : links)
-    tasks.add(new MyCallable(s));
-    for (MyCallable c : tasks)
-    System.out.println("->" + c.src);
+      tasks.add(new MyCallable(s, i++));
     try {
       List <Future<String>> future = executor.invokeAll(tasks);
     } catch (InterruptedException e) {
