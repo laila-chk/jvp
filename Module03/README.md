@@ -130,3 +130,6 @@ the JVM will keep running if the main thread exited and another thread is still 
 thread.setDaemon(true);
 thread.start();
 ```
+
+### Thread Pool:
+thread pool is a very important concept in java multi-threading, it's actually another **Design pattern** that this pool introduces, it simply is a way to create multiple reusable threads managed by **ExecutorServices**, which makes them very efficient, asynchronous, organized and easy to work with, there are a lot of methods, thus I'll suggest reading the docs, because there's a lot to cover..
