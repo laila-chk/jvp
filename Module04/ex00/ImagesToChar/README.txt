@@ -4,13 +4,14 @@ folder that contains the .class files after the compilation of the .java files (
 are too organized the same way as src files, and under the same names)
 
 to compile the .java files, please use the following command from the root dir (ImagesToChar folder)
-```
-javac -d target src/java/fr/_42/printer/app/Main.java
+
+```text
+javac -d target src/java/fr/_42/printer/app/Main.java src/java/fr/_42/printer/logic/ReadAndPrint.java
 ``` 
 make sure that the CLASSPATH env var is correctly set to: "/pathToProject/Module04/ex00/ImagesToChar/target"
 
 if that isn't the case, use this command to do so, from inside the ex00 folder:
 
-```
+```text
 export CLASSPATH=$PWD/ImagesToChar/target
 `` `
