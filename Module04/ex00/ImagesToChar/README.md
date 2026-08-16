@@ -14,4 +14,10 @@ if that isn't the case, use this command to do so, from inside the ex00 folder:
 
 ```
 export CLASSPATH=$PWD/ImagesToChar/target
-`` `
+```
+
+then in order to run the program, the following command can be used:
+
+```
+java fr._42.printer.app.Main M . path/to/it.bmp
+```
