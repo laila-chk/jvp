@@ -9,14 +9,19 @@ import javax.imageio.ImageIO;
 
 
 public class ReadAndPrint {
-  private String[] args;
+  // private String[] args;
   private String whitePixel;
   private String blackPixel;
 
   public ReadAndPrint(String[] args){
-    this.args = args;
-    this.whitePixel = args[0];
-    this.blackPixel= args[1];
+    // this.args = args;
+    if (args.length == 2){
+      this.whitePixel = args[0];
+      this.blackPixel= args[1];
+    } else {
+      this.whitePixel ="O";
+      this.blackPixel= " ";
+    }
   }
 
   public void process() {
