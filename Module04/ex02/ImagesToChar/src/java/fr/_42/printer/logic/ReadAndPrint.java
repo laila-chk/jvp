@@ -10,21 +10,30 @@ import javax.imageio.ImageIO;
 import fr._42.printer.app.Args;
 import com.beust.jcommander.*;
 
+import static com.diogonunes.jcolor.Ansi.colorize;
+import static com.diogonunes.jcolor.Attribute.*;
+
+import com.diogonunes.jcolor.AnsiFormat;
+import com.diogonunes.jcolor.Attribute;
+import com.diogonunes.jcolor.Ansi;
+
+import java.lang.reflect.Method;
 
 public class ReadAndPrint {
   private String[] argv;
-  // private String whitePixel;
-  // private String blackPixel;
 
   public ReadAndPrint(String[] argv){
     this.argv = argv;
-    // if (argv.length == 2){
-    //   this.whitePixel = argv[0];
-    //   this.blackPixel= argv[1];
-    // } else {
-    //   this.whitePixel ="O";
-    //   this.blackPixel= " ";
-    // }
+  }
+
+  Attribute getColor(String clr){
+    try {
+      String clrAttr = clr + "_BACK";
+      Method method = Attribute.class.getMethod(clrAttr);
+      return (Attribute) method.invoke(null);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Invalid color: " + clr, e);
+    }
   }
 
   public void process() {
@@ -50,9 +59,10 @@ public class ReadAndPrint {
         for (int i = 0; i < maxX; i++){
           for (int j = 0; j < maxY; j++){
             if (img.getRGB(j, i) == -1)
-              System.out.print(args.whitePixel);
-            else
-              System.out.print(args.blackPixel);
+              System.out.print(colorize(" ", getColor(args.whitePixel)));
+            else{
+              System.out.print(colorize(" ", getColor(args.blackPixel)));
+            }
           }
           System.out.println("");
         }
