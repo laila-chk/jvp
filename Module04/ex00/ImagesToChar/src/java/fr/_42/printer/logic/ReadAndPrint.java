@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 
 
 public class ReadAndPrint {
-  //param constr with at=rgs
   private String[] args;
   private String whitePixel;
   private String blackPixel;
