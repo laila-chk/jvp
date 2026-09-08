@@ -11,6 +11,7 @@ public class Room {
   private String name;
   private User owner;
   private ArrayList<Message> messages;
+  //maybe we should add list users of a room?
 
   public long getId() {
     return id;
@@ -37,5 +38,10 @@ public class Room {
     this.messages = messages;
   }
 
+  @Override
+  public String toString() {
+    return "Room [id = " + id + ", name = " + name + ", owner = " +
+      owner + ", messages = " + messages + "]";
+  }
 
 }

@@ -44,4 +44,9 @@ public class Message {
     this.timeSent = timeSent;
   }
 
+  @Override
+  public String toString() {
+    return "Message [id = " + id + ", author = " + author + ", room = " +
+            room + ", text = " + text + ", timeSent = " + timeSent + "]";
+  } 
 }

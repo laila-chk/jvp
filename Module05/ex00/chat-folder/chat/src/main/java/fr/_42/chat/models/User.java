@@ -44,4 +44,9 @@ public class User {
     this.joinedRoomsList = joinedRoomsList;
   }
 
+  @Override
+  public String toString() {
+    return "User[id = " + id + ", login=" + login + ", password=" + password +
+    ", createdRoomsList=" + createdRoomsList + ", joinedRoomsList=" + joinedRoomsList + "]";
+  }
 }
