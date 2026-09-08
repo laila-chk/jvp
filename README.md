@@ -7,3 +7,5 @@
 [Module 03](./Module03/README.md)
 
 [Module 04](./Module04/README.md)
+
+[Module 05](./Module05/README.md)
