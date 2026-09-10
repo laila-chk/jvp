@@ -23,3 +23,8 @@ public class Product {
 ```
 Up to now nothing seems interesting *yet!* because I'm trying to serve this as understandable digestible chunks, so far it seems like Entities and their tables mirror each other, but that's not it, in fact they work with each other, based on an Entity class we could Create the table, fill it with data, modify existing one, or remove it, that's what an entity really is for! what's missing now is how to establish a connection between our program (the entities) and the database, here comes the pom.xml file JDBC part.
 
+https://cdn.intra.42.fr/pdf/pdf/87593/en.subject.pdf
+https://cdn.intra.42.fr/pdf/pdf/87594/en.subject.pdf
+https://cdn.intra.42.fr/pdf/pdf/87595/en.subject.pdf
+https://cdn.intra.42.fr/pdf/pdf/87596/en.subject.pdf
+https://cdn.intra.42.fr/pdf/pdf/87597/en.subject.pdf
