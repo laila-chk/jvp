@@ -1,6 +1,7 @@
 package main.java.fr._42.chat.models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -44,9 +45,23 @@ public class User {
     this.joinedRoomsList = joinedRoomsList;
   }
 
+
   @Override
   public String toString() {
     return "User[id = " + id + ", login=" + login + ", password=" + password +
     ", createdRoomsList=" + createdRoomsList + ", joinedRoomsList=" + joinedRoomsList + "]";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    User user = (User) o;
+    return id == user.id;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
   }
 }

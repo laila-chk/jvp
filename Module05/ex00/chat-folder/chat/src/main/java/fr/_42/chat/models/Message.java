@@ -49,4 +49,18 @@ public class Message {
     return "Message [id = " + id + ", author = " + author + ", room = " +
             room + ", text = " + text + ", timeSent = " + timeSent + "]";
   } 
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Message msg = (Message) o;
+    return id == msg.id;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
+
 }
